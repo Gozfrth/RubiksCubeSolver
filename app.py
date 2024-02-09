@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, render_template
-import mymod
 from flask_cors import CORS
+import kociemba
 
 
 app = Flask(__name__, static_url_path='/static')
@@ -16,12 +16,12 @@ def index():
 def test():
 
     data = request.get_json()  # Get the JSON data from the POST request
-    grid = data
+    scrambled_state = data
+    solution = kociemba.solve(scrambled_state)
 
-    # Solve the Sudoku puzzle
-    solution_grid = mymod.sol(grid)
+    response = jsonify(solution=solution)
 
-    return jsonify(solution=solution_grid)
+    return response
 
 
 if __name__ == '__main__':

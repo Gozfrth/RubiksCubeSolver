@@ -1,8 +1,7 @@
 function myfunction() {
-
     let grid = new Array(9).fill(0).map(() => new Array(9).fill(0))
-
     let index = 0;
+
     for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
             temp = i +''+j;
@@ -10,11 +9,14 @@ function myfunction() {
             index++;
         }
     }
+
     const replaced_grid = grid.map(row => row.map(val => val === null ? 0 : val));
     console.log(replaced_grid);
+
     const s = JSON.stringify(replaced_grid);
+
     $.ajax({
-        url:"http://localhost:5000/test",
+        url:"http://127.0.0.1:5000/test",
         type:"POST",
         contentType: "application/json",
         data: s,
@@ -32,14 +34,4 @@ function myfunction() {
             }
         }
     });
-}
-function reset(){
-let index=0
-for (let i = 0; i < 9; i++) {
-    for (let j = 0; j < 9; j++) {
-    temp = i +''+j;
-    document.getElementById(temp).value = '';
-    index++;
-        }
-    }
 }
