@@ -17,7 +17,9 @@ def test():
 
     data = request.get_json()  # Get the JSON data from the POST request
     scrambled_state = data
+    # solution = data
     solution = kociemba.solve(scrambled_state)
+    print( kociemba.solve(scrambled_state))
 
     response = jsonify(solution=solution)
 

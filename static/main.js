@@ -1,7 +1,7 @@
 import {OrbitControls} from 'https://threejsfundamentals.org/threejs/resources/threejs/r122/examples/jsm/controls/OrbitControls.js';
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerWidth, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerWidth, 0.1, 1000);
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth , window.innerHeight  );
@@ -610,94 +610,110 @@ var moveInd = 0;
 
 function makeMoves(solution){
     sol = solution.split(" ");
+    
 }
 
+let str = "";
+
 function makeOneMove(ind){
+
+    if(!sol){
+        return;
+    }
     if(ind < 0){
         alert("NO PREVIOUS MOVE");
     }else if(ind > sol.length){
         alert("NO NEXT MOVE");
     }else{
-        for(let i = 0; i<ind; i++){
-            if(sol[i].length === 1){
-                console.log(sol[i])
-                switch(sol[i]){
-                    case U:
-                        U();
-                        break;
-                    case D:
-                        D();
-                        break;
-                    case F:
-                        F();
-                        break;
-                    case B:
-                        B();
-                        break;
-                    case R:
-                        R();
-                        break;
-                    case L:
-                        L();
-                        break;
-                }
-            }else{
-                console.log(sol[i])
-                if(sol[i][1] != '2'){
-                    switch(sol[i][0]){
-                        case U:
-                            UPrime();
-                            break;
-                        case D:
-                            DPrime();
-                            break;
-                        case F:
-                            FPrime();
-                            break;
-                        case B:
-                            BPrime();
-                            break;
-                        case R:
-                            RPrime();
-                            break;
-                        case L:
-                            LPrime();
-                            break;
-                    }
-                }else{
-                    switch(sol[i][0]){
-                        case U:
-                            U();
-                            U();
-                            break;
-                        case D:
-                            D();
-                            D();
-                            break;
-                        case F:
-                            F();
-                            F();
-                            break;
-                        case B:
-                            B();
-                            B();
-                            break;
-                        case R:
-                            R();
-                            R();
-                            break;
-                        case L:
-                            L();
-                            L();
-                            break;
-                    }
-
-                }
+        if(sol[ind].length == 1){
+            str = sol[ind]
+            switch(sol[ind]){
+                case 'U':
+                    U();
+                    break;
+                case 'D':
+                    D();
+                    break;
+                case 'F':
+                    F();
+                    break;
+                case 'B':
+                    B();
+                    break;
+                case 'R':
+                    R();
+                    break;
+                case 'L':
+                    L();
+                    break;
             }
+        }else if(sol[ind][1] != '2'){
+            switch(sol[ind][0]){
+                case 'U':
+                    UPrime();
+                    break;
+                case 'D':
+                    DPrime();
+                    break;
+                case 'F':
+                    FPrime();
+                    break;
+                case 'B':
+                    BPrime();
+                    break;
+                case 'R':
+                    RPrime();
+                    break;
+                case 'L':
+                    LPrime();
+                    break;
+            }
+        }else{
+            switch(sol[ind][0]){
+                case 'U':
+                    U();
+                    break;
+                case 'D':
+                    D();
+                    break;
+                case 'F':
+                    F();
+                    break;
+                case 'B':
+                    B();
+                    break;
+                case 'R':
+                    R();
+                    break;
+                case 'L':
+                    L();
+                    break;
+            }
+            switch(sol[ind][0]){
+                case 'U':
+                    U();
+                    break;
+                case 'D':
+                    D();
+                    break;
+                case 'F':
+                    F();
+                    break;
+                case 'B':
+                    B();
+                    break;
+                case 'R':
+                    R();
+                    break;
+                case 'L':
+                    L();
+                    break;
+            }
+
         }
     }
+    console.log(str);
 }
-
 const newButton = document.createElement('button');
 newButton.textContent = 'SOLVE!';
 newButton.addEventListener('click', () => {
@@ -711,7 +727,7 @@ newButton.addEventListener('click', () => {
         data: s,
         success: function(response) {
             const solution = response.solution;
-            alert(solution)
+            console.log(solution)
             makeMoves(solution)
         }
     });
@@ -722,14 +738,16 @@ document.body.appendChild(newButton);
 const newButton1 = document.createElement('button');
 newButton1.textContent = 'NEXT MOVE!';
 newButton1.addEventListener('click', () => {
-    makeOneMove(moveInd++)
+    makeOneMove(moveInd)
+    moveInd++
 });
 document.body.appendChild(newButton1);
 
 const newButton2 = document.createElement('button');
 newButton2.textContent = 'PREVIOUSS MOVE!';
 newButton2.addEventListener('click', () => {
-    makeOneMove(moveInd--)
+    makeOneMove(moveInd)
+    moveInd--
 });
 document.body.appendChild(newButton2);
 
