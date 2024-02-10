@@ -615,14 +615,11 @@ function makeMoves(solution){
 
 let str = "";
 
-function makeOneMove(ind){
+function moveNext(ind){
 
     if(!sol){
         return;
-    }
-    if(ind < 0){
-        alert("NO PREVIOUS MOVE");
-    }else if(ind > sol.length){
+    }else if(ind >(sol.length) - 1){
         alert("NO NEXT MOVE");
     }else{
         if(sol[ind].length == 1){
@@ -714,6 +711,108 @@ function makeOneMove(ind){
     }
     console.log(str);
 }
+
+
+function movePrev(ind){
+
+    if(!sol){
+        return;
+    }
+    if(ind < 0){
+        alert("NO PREVIOUS MOVE");
+    }else{
+        if(sol[ind].length == 1){
+            str = sol[ind]
+            switch(sol[ind]){
+                case 'U':
+                    UPrime();
+                    break;
+                case 'D':
+                    DPrime();
+                    break;
+                case 'F':
+                    FPrime();
+                    break;
+                case 'B':
+                    BPrime();
+                    break;
+                case 'R':
+                    RPrime();
+                    break;
+                case 'L':
+                    LPrime();
+                    break;
+            }
+        }else if(sol[ind][1] != '2'){
+            switch(sol[ind][0]){
+                case 'U':
+                    U();
+                    break;
+                case 'D':
+                    D();
+                    break;
+                case 'F':
+                    F();
+                    break;
+                case 'B':
+                    B();
+                    break;
+                case 'R':
+                    R();
+                    break;
+                case 'L':
+                    L();
+                    break;
+            }
+        }else{
+            switch(sol[ind][0]){
+                case 'U':
+                    U();
+                    break;
+                case 'D':
+                    D();
+                    break;
+                case 'F':
+                    F();
+                    break;
+                case 'B':
+                    B();
+                    break;
+                case 'R':
+                    R();
+                    break;
+                case 'L':
+                    L();
+                    break;
+            }
+            switch(sol[ind][0]){
+                case 'U':
+                    U();
+                    break;
+                case 'D':
+                    D();
+                    break;
+                case 'F':
+                    F();
+                    break;
+                case 'B':
+                    B();
+                    break;
+                case 'R':
+                    R();
+                    break;
+                case 'L':
+                    L();
+                    break;
+            }
+
+        }
+    }
+    console.log(str);
+
+}
+
+
 const newButton = document.createElement('button');
 newButton.textContent = 'SOLVE!';
 newButton.addEventListener('click', () => {
@@ -738,7 +837,7 @@ document.body.appendChild(newButton);
 const newButton1 = document.createElement('button');
 newButton1.textContent = 'NEXT MOVE!';
 newButton1.addEventListener('click', () => {
-    makeOneMove(moveInd)
+    moveNext(moveInd)
     moveInd++
 });
 document.body.appendChild(newButton1);
@@ -746,8 +845,7 @@ document.body.appendChild(newButton1);
 const newButton2 = document.createElement('button');
 newButton2.textContent = 'PREVIOUSS MOVE!';
 newButton2.addEventListener('click', () => {
-    makeOneMove(moveInd)
-    moveInd--
+    movePrev(--moveInd)
 });
 document.body.appendChild(newButton2);
 
